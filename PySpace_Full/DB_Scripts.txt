@@ -1,0 +1,76 @@
+create table user_details(
+username varchar2(20) primary key,
+password varchar2(20) not null,
+name varchar2(20) not null,
+surname varchar2(20),
+gender char(1) not null, 
+city varchar2(20) not null,
+relationship_status char(10) not null
+);
+
+
+create table request_status(
+username varchar2(20) references user_details(username),
+friend_username varchar2(20) references user_details(username), 
+primary key (username,friend_username),
+status char(10) not null
+);
+
+create table updates(
+updateid number(10) primary key,
+updates varchar2(255),
+username varchar2(20) references user_details(username),
+time timestamp,
+likes number(10),
+dislike number(10)
+);
+
+create table comments(
+username varchar2(20) references user_details(username),
+updateid number(10) references updates(updateid),
+comments varchar2(255)
+);
+
+create table like_dislike(
+updateid number references updates(updateid),
+username varchar2(20) references user_details(username),
+likestatus varchar2(10),
+primary key(updateid,username)
+);
+
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Shireesha1','welcome@123','Shireesha','xyx','F','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Kratika1','welcome@123','Kratika','xyx','F','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Sneha1','welcome@123','Sneha','xyx','F','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Kratika2','welcome@123','Kratika','xyx','F','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Sneha2','welcome@123','Snehit','xyx','M','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Shireesha2','welcome@123','Siri','xyx','F','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Lavish2','welcome@123','Lavishhh','xyx','M','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Kratika3','welcome@123','Kratzz','xyx','M','Mysore','Single');
+
+insert into user_details(username,password,name,surname,gender,city,relationship_status) values('Kratika4','welcome@123','Krabv','xyx','M','Mysore','Single');
+
+insert into request_status values('Shireesha1','Kratika2','Pending');
+insert into request_status values('Shireesha1','Kratika3','Approved');
+insert into request_status values('Kratika1','Kratika2','Approved');
+insert into request_status values('Kratika1','Kratika3','Approved');
+insert into request_status values('Kratika1','Kratika4','Approved');
+
+insert into updates values(1,'All the best','Shireesha1',systimestamp,0,0);
+
+insert into comments values('Kratika1',3,'Do it fast');
+
+
+
+
+
+
+
+
